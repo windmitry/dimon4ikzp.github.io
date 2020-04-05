@@ -5,7 +5,30 @@ $(function() {
         submitError: function($form, event, errors) {
             // additional error messages or events
         },
-        submitSuccess: function($form, event) {
+       submittSuccess: function($form, e) {
+          e.preventDefault();
+          var action = $(this).attr("action");
+          $.ajax({
+            type: "POST",
+            url: action,
+            crossDomain: true,
+            data: new FormData(this),
+            dataType: "json",
+            contentType: "multipart/form-data",
+            processData: false,
+            contentType: false,
+            headers: {
+              "Accept": "application/json"
+            }
+          }).done(function() {
+             $('.success').addClass('is-active');
+          }).fail(function() {
+             alert('An error occurred please try again later.')
+          });
+        });
+        
+        
+        submittSuccess: function($form, event) {
             // Prevent spam click and default submit behaviour
             $("#btnSubmit").attr("disabled", true);
             event.preventDefault();
@@ -20,6 +43,8 @@ $(function() {
             if (firstName.indexOf(' ') >= 0) {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
+                       
+            
             $.ajax({
                 url: "././mail/contact_me.php",
                 type: "POST",
