@@ -40,5 +40,6 @@
             $(this).removeClass("floating-label-form-group-with-focus");
         });
     });
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
 
 })(jQuery); // End of use strict
