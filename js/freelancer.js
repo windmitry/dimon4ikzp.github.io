@@ -26,7 +26,9 @@
         offset: {
             top: 100
         }
-    })
+    });
+    
+    $('.full-year').html(new Date().getFullYear());
 
     // Floating label headings for the contact form
     $(function() {
